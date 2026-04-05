@@ -15,6 +15,12 @@ const Navbar = () => {
     >
       <nav className="glass flex items-center gap-1 px-2 py-2 rounded-full border border-white/10">
         <button
+          onClick={() => scrollTo('hero')}
+          className="px-5 py-2 rounded-full text-sm font-medium text-slate-300 hover:text-white hover:bg-white/10 transition-all duration-200"
+        >
+          Home
+        </button>
+        <button
           onClick={() => scrollTo('about')}
           className="px-5 py-2 rounded-full text-sm font-medium text-slate-300 hover:text-white hover:bg-white/10 transition-all duration-200"
         >

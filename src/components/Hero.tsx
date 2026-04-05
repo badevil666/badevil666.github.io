@@ -126,7 +126,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-center items-center px-6 overflow-hidden pb-16">
+    <section id="hero" className="relative min-h-screen flex flex-col justify-center items-center px-6 overflow-hidden pb-16">
       {/* Pulsing orb */}
       <motion.div style={{ scale: orbScale }} className="absolute w-[60vw] h-[60vw] max-w-[600px] max-h-[600px] -z-10">
         <motion.div
