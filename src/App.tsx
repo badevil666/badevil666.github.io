@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import BlackholeBackground from './components/BlackholeBackground';
+//import BlackholeBackground from './components/BlackholeBackground';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -40,7 +40,7 @@ function App() {
 
   return (
     <div className="bg-obsidian text-slate-200 font-space min-h-screen selection:bg-purple-500/30">
-      <BlackholeBackground />
+      {/* <BlackholeBackground /> */}
 
       {/* Navbar Wrapper: Handles the smooth slide-in/out animation.
         pointer-events control ensures you can't click invisible buttons when it's hidden.

@@ -153,27 +153,37 @@ const SkillCard = ({ cat, index }: { cat: Category; index: number }) => (
 );
 
 const Skills = () => (
-  <section id="skills" className="py-24 px-6 md:px-12 max-w-6xl mx-auto">
-    <motion.div
-      initial={{ opacity: 0, y: 30, filter: 'blur(6px)' }}
-      whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-      viewport={{ once: false, amount: 0.5 }}
-      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-      className="mb-14 text-center"
-    >
-      <h2 className="text-4xl font-bold tracking-tight">
-        Technical{' '}
-        <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-500 to-purple-500">
-          Arsenal
-        </span>
-      </h2>
-      <p className="mt-3 text-slate-500 text-base font-light">Tools and technologies I work with</p>
-    </motion.div>
+  <section
+    id="skills"
+    // The exact same centering trick:
+    // Full screen height + grid centering + scroll snap
+    className="min-h-[100dvh] w-full grid place-items-center snap-center py-24 px-6 md:px-12"
+  >
+    {/* Inner wrapper to keep your max-width constraints intact */}
+    <div className="max-w-6xl w-full mx-auto">
 
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      {CATEGORIES.map((cat, i) => (
-        <SkillCard key={cat.name} cat={cat} index={i} />
-      ))}
+      <motion.div
+        initial={{ opacity: 0, y: 30, filter: 'blur(6px)' }}
+        whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+        viewport={{ once: false, amount: 0.5 }}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        className="mb-14 text-center"
+      >
+        <h2 className="text-4xl font-bold tracking-tight">
+          Technical{' '}
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-500 to-purple-500">
+            Arsenal
+          </span>
+        </h2>
+        <p className="mt-3 text-slate-500 text-base font-light">Tools and technologies I work with</p>
+      </motion.div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {CATEGORIES.map((cat, i) => (
+          <SkillCard key={cat.name} cat={cat} index={i} />
+        ))}
+      </div>
+
     </div>
   </section>
 );
