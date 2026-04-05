@@ -68,7 +68,7 @@ const projects: Project[] = [
     accent: 'from-purple-500/20 to-emerald-500/10',
     accentBorder: 'border-purple-500/25',
     accentText: 'text-purple-400',
-    link: '#',
+    link: 'https://socials.yoco.co.in',
     github: '#',
     flip: false,
   },

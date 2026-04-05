@@ -140,7 +140,7 @@ const Projects = ({ onSelect }: { onSelect: (project: Project) => void }) => (
       {projects.map((project, i) => (
         <div
           key={project.title}
-          // The magic classes: min-h-screen for full height, snap-center to catch the scroll
+          id={`project-${i}`}
           className="min-h-screen w-full flex items-center justify-center snap-center px-6 md:px-12 py-16"
         >
           <div className="max-w-6xl w-full mx-auto">
