@@ -7,7 +7,7 @@ import Projects from './components/Projects';
 import Security from './components/Security';
 import Footer from './components/Footer';
 import Blueprint from './components/Blueprint';
-import ParticleBackground from './components/ParticleBackground';
+import AuroraBackground from './components/AuroraBackground';
 import projects, { type Project } from './data/projects';
 
 function App() {
@@ -19,7 +19,15 @@ function App() {
       {/* Side navbar — always visible */}
       <Navbar />
 
-      <ParticleBackground />
+      <AuroraBackground />
+
+      {/* Dark vignette — sits between aurora and content for readability */}
+      <div className="fixed inset-0 pointer-events-none" style={{ zIndex: 2 }}>
+        {/* Top-to-bottom darkening */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-transparent" />
+        {/* Left-edge deepening where navbar is */}
+        <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-black/40 to-transparent" />
+      </div>
 
       <div className="relative z-10">
         <Hero />
