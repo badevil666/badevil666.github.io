@@ -7,7 +7,7 @@ import Projects from './components/Projects';
 import Security from './components/Security';
 import Footer from './components/Footer';
 import Blueprint from './components/Blueprint';
-//import AuroraBackground from './components/AuroraBackground';
+import AuroraBackground from './components/AuroraBackground';
 import { initSmoothScroll } from './utils/smoothScroll';
 import projects, { type Project } from './data/projects';
 
@@ -24,7 +24,7 @@ function App() {
       {/* Side navbar — always visible */}
       <Navbar />
 
-      {/*<AuroraBackground />*/}
+      {<AuroraBackground />}
 
       {/* Dark vignette — sits between aurora and content for readability */}
       <div className="fixed inset-0 pointer-events-none" style={{ zIndex: 2 }}>
