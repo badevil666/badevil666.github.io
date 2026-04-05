@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { BookOpen, Code, CheckCircle2, Zap } from 'lucide-react';
+import { BookOpen, Code, CheckCircle2, Zap, ChevronDown } from 'lucide-react';
 import projects, { type Project } from '../data/projects';
 
 const panelAnim = (fromX: number, delay = 0) => ({
@@ -121,20 +121,46 @@ const ProjectRow = ({ project, index, onSelect }: { project: Project; index: num
 
 const Projects = ({ onSelect }: { onSelect: (project: Project) => void }) => (
   <section id="projects" className="w-full">
-    {/* Header - Centered in its own shorter block so it snaps gracefully before projects begin */}
-    <motion.div
-      initial={{ opacity: 0, y: 30, filter: 'blur(6px)' }}
-      whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-      viewport={{ once: false, amount: 0.5 }}
-      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-      className="min-h-[50vh] flex flex-col justify-center items-center text-center snap-center px-6"
-    >
-      <h2 className="text-4xl font-bold tracking-tight">
-        Selected{' '}
-        <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-emerald-600">Works</span>
-      </h2>
-      <p className="mt-3 text-slate-500 font-light">A few things I've built</p>
-    </motion.div>
+    {/* Header — full-screen landing page for the projects section */}
+    <div className="min-h-screen w-full flex flex-col justify-center items-center text-center relative px-6">
+      <motion.div
+        initial={{ opacity: 0, y: 30, filter: 'blur(6px)' }}
+        whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+        viewport={{ once: false, amount: 0.5 }}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+      >
+        <p className="text-emerald-400 text-sm font-semibold tracking-widest uppercase mb-4">Portfolio</p>
+        <h2 className="text-5xl md:text-6xl font-bold tracking-tight">
+          Selected{' '}
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-emerald-600">Works</span>
+        </h2>
+        <p className="mt-4 text-slate-500 font-light text-lg">A few things I've built</p>
+      </motion.div>
+
+      {/* Scroll-down indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: false }}
+        transition={{ delay: 0.6, duration: 0.8 }}
+        className="absolute bottom-10 flex flex-col items-center gap-2"
+      >
+        <span className="text-[11px] uppercase tracking-widest text-slate-600 font-medium">Scroll to explore</span>
+        <div className="w-[1px] h-10 bg-gradient-to-b from-transparent via-emerald-500/60 to-transparent relative overflow-hidden">
+          <motion.div
+            animate={{ y: ['-100%', '200%'] }}
+            transition={{ duration: 1.4, repeat: Infinity, ease: 'linear' }}
+            className="absolute top-0 left-0 w-full h-full bg-emerald-400"
+          />
+        </div>
+        <motion.div
+          animate={{ y: [0, 5, 0] }}
+          transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+        >
+          <ChevronDown className="w-4 h-4 text-emerald-500/70" />
+        </motion.div>
+      </motion.div>
+    </div>
 
     <div className="flex flex-col w-full">
       {projects.map((project, i) => (

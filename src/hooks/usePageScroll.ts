@@ -9,7 +9,7 @@ const COOLDOWN = 950;
 const absTop = (el: Element) => el.getBoundingClientRect().top + window.scrollY;
 
 const getTargetIds = (): string[] => {
-  const ids = ['hero', 'about', 'skills'];
+  const ids = ['hero', 'about', 'skills', 'projects'];
   projects.forEach((_, i) => ids.push(`project-${i}`));
   ids.push('security', 'contact');
   return ids;
