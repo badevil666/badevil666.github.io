@@ -1,3 +1,4 @@
+/*
 import { useEffect, useRef } from 'react';
 
 // ── types ─────────────────────────────────────────────────────────────────────
@@ -286,3 +287,4 @@ const AuroraBackground = () => {
 };
 
 export default AuroraBackground;
+*/
