@@ -57,7 +57,9 @@ const BANDS: Band[] = [
   },
 ];
 
-const SLICE_W = 3; // px per vertical slice
+const SLICE_W  = 8;   // px per vertical slice — wider = fewer gradient fills
+const FPS_CAP  = 30;  // aurora doesn't need 60fps
+const FRAME_MS = 1000 / FPS_CAP;
 
 // ── component ─────────────────────────────────────────────────────────────────
 const AuroraBackground = () => {
@@ -68,10 +70,11 @@ const AuroraBackground = () => {
     const canvas = canvasRef.current!;
     const ctx    = canvas.getContext('2d')!;
 
-    let W = 0, H = 0, t = 0;
+    let W = 0, H = 0, t = 0, lastFrame = 0;
     let stars: Star[]          = [];
-    let terrain: number[]      = []; // y values per-pixel x
+    let terrain: number[]      = [];
     let treeLine: { x: number; h: number; layers: number }[] = [];
+    let terrainCache: HTMLCanvasElement | null = null; // pre-rendered terrain
 
     // ── resize ───────────────────────────────────────────────────────────────
     const resize = () => {
@@ -83,7 +86,7 @@ const AuroraBackground = () => {
 
     // ── stars ─────────────────────────────────────────────────────────────────
     const buildStars = () => {
-      stars = Array.from({ length: 260 }, () => ({
+      stars = Array.from({ length: 150 }, () => ({
         x:     Math.random() * W,
         y:     Math.random() * H * 0.72,
         r:     Math.random() * 1.1 + 0.3,
