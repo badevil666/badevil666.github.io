@@ -58,24 +58,18 @@ const tom = {
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
 
 <br/>
-
-## &nbsp;Tech Arsenal
+## ⚡ Tech Arsenal
 
 <div align="center">
 
-<img src="https://skillicons.dev/icons?i=ts,js,py,dart&theme=dark&perline=8" /><br/>
-<img src="https://skillicons.dev/icons?i=nodejs,express,fastapi,react&theme=dark&perline=8" /><br/>
-<img src="https://skillicons.dev/icons?i=flutter,androidstudio,postgres,mysql&theme=dark&perline=8" /><br/>
-<img src="https://skillicons.dev/icons?i=docker,git,github,vscode&theme=dark&perline=8" />
-
-</div>
+<p align="center">
+  <img src="https://skillicons.dev/icons?i=ts,js,py,dart,nodejs,express,fastapi,react,flutter,androidstudio,postgres,mysql,docker,git,github,vscode&theme=dark&perline=8" />
+</p>
 
 <br/>
-
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
 
-<br/>
-
+</div>
 ## &nbsp;GitHub Stats
 
 <div align="center">
