@@ -6,7 +6,7 @@
 
 <br/>
 
-[![Portfolio](https://img.shields.io/badge/Portfolio-0a0a0a?style=for-the-badge&logo=vercel&logoColor=a855f7)](https://badevil666.github.io/badevil666)
+[![Portfolio](https://img.shields.io/badge/Portfolio-0a0a0a?style=for-the-badge&logo=vercel&logoColor=a855f7)](https://badevil666.github.io)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/tom-cherian-a599ba373/)
 [![Upwork](https://img.shields.io/badge/Upwork-14a800?style=for-the-badge&logo=upwork&logoColor=white)](https://www.upwork.com/freelancers/~01504aced8c8c9471d?mp_source=share)
 [![Email](https://img.shields.io/badge/Email-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:ctom71718@gmail.com)
@@ -15,10 +15,6 @@
 
 ---
 
-<table>
-<tr>
-<td valign="top" width="55%">
-
 ### About Me
 
 - I build **full-stack web and mobile apps** from the ground up
@@ -26,15 +22,6 @@
 - Actively practice **VAPT** and **OWASP Top 10** security testing
 - Mobile experience with **Flutter** (cross-platform) and **Android Native**
 - Currently freelancing and building projects that ship to real users
-
-</td>
-<td valign="top">
-
-<img src="https://github-readme-stats.vercel.app/api?username=badevil666&show_icons=true&theme=transparent&hide_border=true&title_color=a855f7&icon_color=10b981&text_color=c0c0c0&bg_color=0d1117&rank_icon=github" width="100%" />
-
-</td>
-</tr>
-</table>
 
 ---
 
@@ -79,8 +66,8 @@
 
 <div align="center">
 
-<img src="https://github-readme-streak-stats.herokuapp.com?user=badevil666&theme=transparent&hide_border=true&stroke=ffffff20&ring=a855f7&fire=10b981&currStreakLabel=a855f7&sideLabels=aaaaaa&currStreakNum=ffffff&sideNums=ffffff&dates=666666" width="49%" />
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=badevil666&layout=compact&theme=transparent&hide_border=true&title_color=a855f7&text_color=c0c0c0&bg_color=00000000&langs_count=6" width="40%" />
+<img src="https://streak-stats.demolab.com?user=badevil666&theme=dark&hide_border=true&stroke=ffffff15&ring=a855f7&fire=10b981&currStreakLabel=a855f7&sideLabels=888888&currStreakNum=ffffff&sideNums=ffffff&dates=666666&background=0d1117" width="49%" />
+<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=badevil666&layout=compact&hide_border=true&title_color=a855f7&text_color=c0c0c0&bg_color=0d1117&langs_count=6" width="40%" />
 
 </div>
 
