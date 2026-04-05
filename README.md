@@ -8,7 +8,7 @@
 
 <br/>
 
-<a href="https://badevil666.github.io">
+<a href="https://badevil666.github.io/badevil666">
   <img src="https://img.shields.io/badge/%F0%9F%8C%90%20Portfolio-a855f7?style=for-the-badge&labelColor=0a0a0a" />
 </a>
 <a href="https://www.linkedin.com/in/tom-cherian-a599ba373/">
