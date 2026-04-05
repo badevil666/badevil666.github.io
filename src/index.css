@@ -52,38 +52,18 @@
 }
 
 html {
-  scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;
+  scroll-behavior: auto; /* JS handles scrolling */
 }
 
 body {
   overflow-x: hidden;
+  overflow-y: scroll;
 }
 
-/* Every section snaps to the top of the viewport */
 section {
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
   min-height: 100vh;
 }
 
-footer {
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-}
-
-/* Projects section itself doesn't snap — its inner rows do */
 section#projects {
-  scroll-snap-align: none;
   min-height: auto;
-}
-
-/* Each project snap zone (heading + each row) */
-.snap-zone {
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 }

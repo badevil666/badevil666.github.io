@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ChevronDown, Code2, ShieldCheck, Layers } from 'lucide-react';
 import profileImg from '../assets/hero.jpg';
+import { scrollToId } from '../utils/smoothScroll';
 
 // ── Inline SVG brand icons ────────────────────────────────────────────────────
 
@@ -197,30 +198,14 @@ const Hero = () => {
             >
               <a
                 href="#contact"
-                onClick={e => {
-                  e.preventDefault();
-                  const el = document.getElementById('contact');
-                  if (!el) return;
-                  const html = document.documentElement;
-                  html.style.scrollSnapType = 'none';
-                  el.scrollIntoView({ behavior: 'instant' });
-                  requestAnimationFrame(() => { html.style.scrollSnapType = ''; });
-                }}
+                onClick={e => { e.preventDefault(); scrollToId('contact'); }}
                 className="px-6 py-3 bg-gradient-to-r from-purple-600 to-violet-600 rounded-full text-sm font-semibold text-white hover:opacity-90 transition-opacity shadow-lg shadow-purple-500/20"
               >
                 Get in Touch
               </a>
               <a
                 href="#projects"
-                onClick={e => {
-                  e.preventDefault();
-                  const el = document.getElementById('projects');
-                  if (!el) return;
-                  const html = document.documentElement;
-                  html.style.scrollSnapType = 'none';
-                  el.scrollIntoView({ behavior: 'instant' });
-                  requestAnimationFrame(() => { html.style.scrollSnapType = ''; });
-                }}
+                onClick={e => { e.preventDefault(); scrollToId('projects'); }}
                 className="px-6 py-3 glass rounded-full text-sm font-semibold border border-white/15 hover:bg-white/10 transition-colors"
               >
                 View Projects

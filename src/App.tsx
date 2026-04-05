@@ -8,9 +8,11 @@ import Security from './components/Security';
 import Footer from './components/Footer';
 import Blueprint from './components/Blueprint';
 import AuroraBackground from './components/AuroraBackground';
+import { usePageScroll } from './hooks/usePageScroll';
 import projects, { type Project } from './data/projects';
 
 function App() {
+  usePageScroll();
   const [selected, setSelected] = useState<Project | null>(null);
   const selectedIndex = selected ? projects.findIndex((p) => p.title === selected.title) : 0;
 

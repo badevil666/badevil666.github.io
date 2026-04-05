@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Home, User, Cpu, FolderOpen, ShieldCheck, Mail, GitBranch } from 'lucide-react';
 import projects from '../data/projects';
+import { scrollToId } from '../utils/smoothScroll';
 
 const NAV_ITEMS = [
   { id: 'hero',     label: 'Home',     icon: Home        },
@@ -45,19 +46,8 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const snapTo = (id: string) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    const html = document.documentElement;
-    html.style.scrollSnapType = 'none';
-    el.scrollIntoView({ behavior: 'instant' });
-    requestAnimationFrame(() => {
-      html.style.scrollSnapType = '';
-    });
-  };
-
-  const scrollTo        = (id: string) => snapTo(id);
-  const scrollToProject = (i: number)  => snapTo(`project-${i}`);
+  const scrollTo        = (id: string) => scrollToId(id);
+  const scrollToProject = (i: number)  => scrollToId(`project-${i}`);
 
   return (
     <motion.aside
