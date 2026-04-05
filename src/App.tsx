@@ -7,6 +7,7 @@ import Projects from './components/Projects';
 import Security from './components/Security';
 import Footer from './components/Footer';
 import Blueprint from './components/Blueprint';
+import ParticleBackground from './components/ParticleBackground';
 import projects, { type Project } from './data/projects';
 
 function App() {
@@ -18,11 +19,7 @@ function App() {
       {/* Side navbar — always visible */}
       <Navbar />
 
-      {/* Background ambient glow effects */}
-      <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-500/20 rounded-full blur-[120px] mix-blend-screen" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-emerald-500/10 rounded-full blur-[120px] mix-blend-screen" />
-      </div>
+      <ParticleBackground />
 
       <div className="relative z-10">
         <Hero />
