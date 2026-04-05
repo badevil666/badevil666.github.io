@@ -15,7 +15,9 @@
 
 ---
 
-<img align="right" src="https://github-readme-stats.vercel.app/api?username=badevil666&show_icons=true&theme=transparent&hide_border=true&title_color=a855f7&icon_color=10b981&text_color=c0c0c0&bg_color=00000000&rank_icon=github" width="48%" />
+<table>
+<tr>
+<td valign="top" width="55%">
 
 ### About Me
 
@@ -25,7 +27,14 @@
 - Mobile experience with **Flutter** (cross-platform) and **Android Native**
 - Currently freelancing and building projects that ship to real users
 
-<br clear="right"/>
+</td>
+<td valign="top">
+
+<img src="https://github-readme-stats.vercel.app/api?username=badevil666&show_icons=true&theme=transparent&hide_border=true&title_color=a855f7&icon_color=10b981&text_color=c0c0c0&bg_color=0d1117&rank_icon=github" width="100%" />
+
+</td>
+</tr>
+</table>
 
 ---
 
