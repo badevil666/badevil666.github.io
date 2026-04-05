@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -8,11 +8,14 @@ import Security from './components/Security';
 import Footer from './components/Footer';
 import Blueprint from './components/Blueprint';
 //import AuroraBackground from './components/AuroraBackground';
-import { usePageScroll } from './hooks/usePageScroll';
+import { initSmoothScroll } from './utils/smoothScroll';
 import projects, { type Project } from './data/projects';
 
 function App() {
-  usePageScroll();
+  useEffect(() => {
+    const cleanup = initSmoothScroll();
+    return cleanup;
+  }, []);
   const [selected, setSelected] = useState<Project | null>(null);
   const selectedIndex = selected ? projects.findIndex((p) => p.title === selected.title) : 0;
 

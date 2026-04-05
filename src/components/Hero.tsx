@@ -149,11 +149,12 @@ const Hero = () => {
     <section id="hero" className="relative min-h-screen flex flex-col justify-center items-center px-6 overflow-hidden pb-8">
 
       {/* Pulsing orb */}
-      <motion.div style={{ scale: orbScale }} className="absolute w-[60vw] h-[60vw] max-w-[700px] max-h-[700px] -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+      <motion.div style={{ scale: orbScale, willChange: 'transform' }} className="absolute w-[60vw] h-[60vw] max-w-[700px] max-h-[700px] -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
         <motion.div
           animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.45, 0.2] }}
           transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
           className="w-full h-full bg-purple-500/20 rounded-full blur-[120px]"
+          style={{ willChange: 'transform, opacity' }}
         />
       </motion.div>
 
