@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Code2, ShieldCheck, Layers } from 'lucide-react';
+import profileImg from '../assets/hero.jpg';
 
 // ── Inline SVG brand icons ────────────────────────────────────────────────────
 
@@ -32,7 +33,6 @@ const DockerIcon = () => (
   </svg>
 );
 
-// Generic colored badge for everything else
 const Badge = ({ label, color }: { label: string; color: string }) => (
   <div
     className="w-7 h-7 rounded-md flex items-center justify-center text-[9px] font-bold leading-none flex-shrink-0"
@@ -49,52 +49,36 @@ type TechItem = { name: string; icon: ReactNode };
 const ROW1: TechItem[] = [
   { name: 'JavaScript', icon: <Badge label="JS" color="#F7DF1E" /> },
   { name: 'TypeScript', icon: <Badge label="TS" color="#3178C6" /> },
-  { name: 'Python', icon: <Badge label="Py" color="#3776AB" /> },
-  { name: 'React', icon: <ReactIcon /> },
-  { name: 'Node.js', icon: <Badge label="N" color="#339933" /> },
-  { name: 'FastAPI', icon: <Badge label="⚡" color="#009688" /> },
-  { name: 'Flutter', icon: <FlutterIcon /> },
-  { name: 'Android', icon: <Badge label="🤖" color="#3DDC84" /> },
-  { name: 'Dart', icon: <Badge label="Dt" color="#0175C2" /> },
+  { name: 'Python',     icon: <Badge label="Py" color="#3776AB" /> },
+  { name: 'React',      icon: <ReactIcon /> },
+  { name: 'Node.js',    icon: <Badge label="N" color="#339933" /> },
+  { name: 'FastAPI',    icon: <Badge label="⚡" color="#009688" /> },
+  { name: 'Flutter',    icon: <FlutterIcon /> },
+  { name: 'Android',    icon: <Badge label="🤖" color="#3DDC84" /> },
+  { name: 'Dart',       icon: <Badge label="Dt" color="#0175C2" /> },
 ];
 
 const ROW2: TechItem[] = [
   { name: 'PostgreSQL', icon: <Badge label="PG" color="#336791" /> },
-  { name: 'MySQL', icon: <Badge label="My" color="#4479A1" /> },
+  { name: 'MySQL',      icon: <Badge label="My" color="#4479A1" /> },
   { name: 'ClickHouse', icon: <Badge label="CH" color="#FFCC00" /> },
-  { name: 'Git', icon: <GitIcon /> },
-  { name: 'Docker', icon: <DockerIcon /> },
+  { name: 'Git',        icon: <GitIcon /> },
+  { name: 'Docker',     icon: <DockerIcon /> },
   { name: 'Express.js', icon: <Badge label="Ex" color="#cccccc" /> },
-  { name: 'SQL', icon: <Badge label="SQL" color="#F29111" /> },
+  { name: 'SQL',        icon: <Badge label="SQL" color="#F29111" /> },
   { name: 'Burp Suite', icon: <Badge label="🔥" color="#FF6633" /> },
-  { name: 'OWASP', icon: <Badge label="⚔️" color="#a855f7" /> },
+  { name: 'OWASP',      icon: <Badge label="⚔️" color="#a855f7" /> },
 ];
 
 // ── Marquee row ───────────────────────────────────────────────────────────────
 
-const MarqueeRow = ({
-  items,
-  direction,
-  duration,
-}: {
-  items: TechItem[];
-  direction: 'left' | 'right';
-  duration: number;
-}) => {
+const MarqueeRow = ({ items, direction, duration }: { items: TechItem[]; direction: 'left' | 'right'; duration: number }) => {
   const doubled = [...items, ...items];
   return (
     <div className="overflow-hidden w-full">
-      <div
-        className="flex gap-3 w-max"
-        style={{
-          animation: `marquee-${direction} ${duration}s linear infinite`,
-        }}
-      >
+      <div className="flex gap-3 w-max" style={{ animation: `marquee-${direction} ${duration}s linear infinite` }}>
         {doubled.map((tech, i) => (
-          <div
-            key={i}
-            className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm text-slate-300 text-sm font-medium whitespace-nowrap flex-shrink-0"
-          >
+          <div key={i} className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm text-slate-300 text-sm font-medium whitespace-nowrap flex-shrink-0">
             {tech.icon}
             {tech.name}
           </div>
@@ -104,71 +88,223 @@ const MarqueeRow = ({
   );
 };
 
+// ── Floating badge ────────────────────────────────────────────────────────────
+
+const FloatBadge = ({
+  icon,
+  label,
+  sub,
+  color,
+  delay,
+  className,
+}: {
+  icon: ReactNode;
+  label: string;
+  sub: string;
+  color: string;
+  delay: number;
+  className: string;
+}) => (
+  <motion.div
+    initial={{ opacity: 0, scale: 0.7 }}
+    animate={{ opacity: 1, scale: 1 }}
+    transition={{ delay, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+    className={`absolute ${className} glass border border-white/10 rounded-2xl px-3 py-2.5 flex items-center gap-2.5 shadow-xl backdrop-blur-md z-10`}
+  >
+    <motion.div
+      animate={{ y: [0, -6, 0] }}
+      transition={{ duration: 3 + delay, repeat: Infinity, ease: 'easeInOut' }}
+      className="flex items-center gap-2.5"
+    >
+      <div className="w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: `${color}20`, border: `1px solid ${color}40` }}>
+        <div style={{ color }}>{icon}</div>
+      </div>
+      <div>
+        <p className="text-xs font-semibold text-slate-100 leading-tight">{label}</p>
+        <p className="text-[10px] text-slate-500 leading-tight">{sub}</p>
+      </div>
+    </motion.div>
+  </motion.div>
+);
+
 // ── Hero ──────────────────────────────────────────────────────────────────────
 
 const Hero = () => {
   const { scrollY } = useScroll();
-  const heroY = useTransform(scrollY, [0, 500], [0, 150]);
+  const heroY       = useTransform(scrollY, [0, 500], [0, 150]);
   const heroOpacity = useTransform(scrollY, [0, 300], [1, 0]);
-  const orbScale = useTransform(scrollY, [0, 500], [1, 1.5]);
+  const orbScale    = useTransform(scrollY, [0, 500], [1, 1.5]);
 
   const textVariants = {
-    hidden: { opacity: 0, y: 50 },
+    hidden:  { opacity: 0, y: 40 },
     visible: (i: number) => ({
       opacity: 1,
       y: 0,
-      transition: {
-        delay: i * 0.1,
-        duration: 0.8,
-        ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
-      },
+      transition: { delay: i * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] },
     }),
   };
 
   return (
-    <section id="hero" className="relative min-h-screen flex flex-col justify-center items-center px-6 overflow-hidden pb-16">
+    <section id="hero" className="relative min-h-screen flex flex-col justify-center items-center px-6 overflow-hidden pb-8">
+
       {/* Pulsing orb */}
-      <motion.div style={{ scale: orbScale }} className="absolute w-[60vw] h-[60vw] max-w-[600px] max-h-[600px] -z-10">
+      <motion.div style={{ scale: orbScale }} className="absolute w-[60vw] h-[60vw] max-w-[700px] max-h-[700px] -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
         <motion.div
-          animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.6, 0.3] }}
+          animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.45, 0.2] }}
           transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-          className="w-full h-full bg-purple-500/20 rounded-full blur-[100px]"
+          className="w-full h-full bg-purple-500/20 rounded-full blur-[120px]"
         />
       </motion.div>
 
       {/* Main content */}
       <motion.div
         style={{ y: heroY, opacity: heroOpacity }}
-        className="z-10 text-center max-w-5xl mx-auto flex flex-col items-center"
+        className="z-10 w-full max-w-6xl mx-auto flex flex-col items-center gap-14"
       >
-        <motion.p
-          custom={0} initial="hidden" animate="visible" variants={textVariants}
-          className="text-emerald-400 font-medium tracking-widest uppercase mb-4 text-sm md:text-base"
-        >
-          Full Stack Developer | Backend, Frontend, Mobile App & Security Focus
-        </motion.p>
+        {/* Two-column: text + photo */}
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center">
 
-        <motion.h1
-          custom={1} initial="hidden" animate="visible" variants={textVariants}
-          className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-tight mb-4"
-        >
-          Tom <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-emerald-400">Cherian</span>
-        </motion.h1>
+          {/* ── Left: Text ── */}
+          <div className="flex flex-col items-center md:items-start text-center md:text-left order-2 md:order-1">
+            <motion.p
+              custom={0} initial="hidden" animate="visible" variants={textVariants}
+              className="text-emerald-400 font-semibold tracking-widest uppercase mb-4 text-sm"
+            >
+              Full Stack Developer &amp; Security Focus
+            </motion.p>
 
-        <motion.p
-          custom={2} initial="hidden" animate="visible" variants={textVariants}
-          className="text-lg md:text-xl text-slate-300 max-w-2xl font-light mb-8"
-        >
-          I build scalable web and mobile applications, design efficient backend systems, and test them for security vulnerabilities.
-        </motion.p>
+            <motion.h1
+              custom={1} initial="hidden" animate="visible" variants={textVariants}
+              className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter leading-tight mb-5"
+            >
+              Tom{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-emerald-400">
+                Cherian
+              </span>
+            </motion.h1>
 
-        {/* Tech stack marquee */}
+            <motion.p
+              custom={2} initial="hidden" animate="visible" variants={textVariants}
+              className="text-base md:text-lg text-slate-400 max-w-xl font-light leading-relaxed mb-8"
+            >
+              I build scalable web and mobile applications, design efficient backend
+              systems, and test them for security vulnerabilities.
+            </motion.p>
+
+            <motion.div
+              custom={3} initial="hidden" animate="visible" variants={textVariants}
+              className="flex flex-wrap gap-3 justify-center md:justify-start"
+            >
+              <a
+                href="#contact"
+                onClick={e => {
+                  e.preventDefault();
+                  const el = document.getElementById('contact');
+                  if (!el) return;
+                  const html = document.documentElement;
+                  html.style.scrollSnapType = 'none';
+                  el.scrollIntoView({ behavior: 'instant' });
+                  requestAnimationFrame(() => { html.style.scrollSnapType = ''; });
+                }}
+                className="px-6 py-3 bg-gradient-to-r from-purple-600 to-violet-600 rounded-full text-sm font-semibold text-white hover:opacity-90 transition-opacity shadow-lg shadow-purple-500/20"
+              >
+                Get in Touch
+              </a>
+              <a
+                href="#projects"
+                onClick={e => {
+                  e.preventDefault();
+                  const el = document.getElementById('projects');
+                  if (!el) return;
+                  const html = document.documentElement;
+                  html.style.scrollSnapType = 'none';
+                  el.scrollIntoView({ behavior: 'instant' });
+                  requestAnimationFrame(() => { html.style.scrollSnapType = ''; });
+                }}
+                className="px-6 py-3 glass rounded-full text-sm font-semibold border border-white/15 hover:bg-white/10 transition-colors"
+              >
+                View Projects
+              </a>
+            </motion.div>
+          </div>
+
+          {/* ── Right: Photo ── */}
+          <motion.div
+            custom={1} initial="hidden" animate="visible" variants={textVariants}
+            className="flex justify-center items-center order-1 md:order-2"
+          >
+            <div className="relative">
+
+              {/* Outer ambient glow */}
+              <div className="absolute inset-[-30px] rounded-full bg-gradient-to-br from-purple-600/25 via-violet-500/15 to-emerald-500/20 blur-3xl pointer-events-none" />
+
+              {/* Rotating gradient ring */}
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 18, repeat: Infinity, ease: 'linear' }}
+                className="absolute inset-[-4px] rounded-full"
+                style={{
+                  background: 'conic-gradient(from 0deg, #a855f7, #6d28d9, #10b981, #a855f7)',
+                  borderRadius: '50%',
+                  padding: '3px',
+                  WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                  WebkitMaskComposite: 'xor',
+                  maskComposite: 'exclude',
+                }}
+              />
+
+              {/* Static gradient ring (so photo doesn't spin) */}
+              <div className="relative p-[3px] rounded-full bg-gradient-to-br from-purple-500 via-violet-600 to-emerald-500">
+                <div className="p-1 rounded-full bg-obsidian">
+                  <img
+                    src={profileImg}
+                    alt="Tom Cherian"
+                    className="w-64 h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 rounded-full object-cover object-top"
+                  />
+                </div>
+              </div>
+
+              {/* Floating badge — top right */}
+              <FloatBadge
+                icon={<Code2 className="w-4 h-4" />}
+                label="Full Stack"
+                sub="Web · Mobile · API"
+                color="#a855f7"
+                delay={0.8}
+                className="-top-4 -right-4 md:-right-12"
+              />
+
+              {/* Floating badge — bottom left */}
+              <FloatBadge
+                icon={<ShieldCheck className="w-4 h-4" />}
+                label="Security"
+                sub="VAPT · OWASP"
+                color="#10b981"
+                delay={1.0}
+                className="-bottom-4 -left-4 md:-left-12"
+              />
+
+              {/* Floating badge — right middle */}
+              <FloatBadge
+                icon={<Layers className="w-4 h-4" />}
+                label="3+ Projects"
+                sub="Shipped to users"
+                color="#6d28d9"
+                delay={1.2}
+                className="top-1/2 -translate-y-1/2 -right-6 md:-right-16"
+              />
+
+            </div>
+          </motion.div>
+        </div>
+
+        {/* ── Marquee ── */}
         <motion.div
-          custom={3} initial="hidden" animate="visible" variants={textVariants}
+          custom={4} initial="hidden" animate="visible" variants={textVariants}
           className="w-full max-w-3xl flex flex-col gap-3"
         >
-          <p className="text-xs uppercase tracking-widest text-slate-500 mb-1">Tech Stack</p>
-          <MarqueeRow items={ROW1} direction="left" duration={28} />
+          <p className="text-xs uppercase tracking-widest text-slate-600 text-center mb-1">Tech Stack</p>
+          <MarqueeRow items={ROW1} direction="left"  duration={28} />
           <MarqueeRow items={ROW2} direction="right" duration={22} />
         </motion.div>
       </motion.div>
@@ -177,7 +313,7 @@ const Hero = () => {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.8, duration: 1 }}
+        transition={{ delay: 2, duration: 1 }}
         className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
       >
         <div className="w-[1px] h-12 bg-gradient-to-b from-transparent via-slate-400 to-transparent relative overflow-hidden">
@@ -187,10 +323,7 @@ const Hero = () => {
             className="absolute top-0 left-0 w-full h-full bg-white"
           />
         </div>
-        <motion.div
-          animate={{ y: [0, 5, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-        >
+        <motion.div animate={{ y: [0, 5, 0] }} transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}>
           <ChevronDown className="w-5 h-5 text-slate-400" />
         </motion.div>
       </motion.div>
