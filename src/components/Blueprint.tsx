@@ -4,9 +4,10 @@ import { ArrowLeft, ExternalLink, Code, CheckCircle2, Zap, AlertTriangle, Lightb
 import type { Project } from '../data/projects';
 
 const STATUS_COLORS: Record<Project['status'], string> = {
-  Completed:   'text-emerald-400 border-emerald-500/30 bg-emerald-500/10',
-  'In Progress': 'text-amber-400 border-amber-500/30 bg-amber-500/10',
-  Deployed:    'text-sky-400 border-sky-500/30 bg-sky-500/10',
+  Completed:           'text-emerald-400 border-emerald-500/30 bg-emerald-500/10',
+  'In Progress':       'text-amber-400 border-amber-500/30 bg-amber-500/10',
+  Deployed:            'text-sky-400 border-sky-500/30 bg-sky-500/10',
+  'Live on Play Store': 'text-amber-300 border-amber-400/40 bg-amber-400/10',
 };
 
 // ── Sections ──────────────────────────────────────────────────────────────────
@@ -71,7 +72,8 @@ const Blueprint = ({ project, onClose, index, total }: Props) => {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: '100%', opacity: 0 }}
           transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed inset-0 z-[200] bg-obsidian overflow-y-auto"
+          className="fixed inset-0 z-[200] bg-obsidian overflow-y-auto overscroll-contain"
+          style={{ WebkitOverflowScrolling: 'touch' } as React.CSSProperties}
         >
           {/* ── Sticky top bar ── */}
           <div className="sticky top-0 z-10 flex items-center justify-between px-6 md:px-12 py-4 bg-obsidian/80 backdrop-blur-xl border-b border-white/5">

@@ -3,7 +3,7 @@ import { Mail, Link2, Briefcase } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer id="contact" className="relative py-40 px-6 md:px-12 overflow-hidden flex flex-col items-center border-t border-white/5">
+    <footer id="contact" className="relative py-20 md:py-40 pb-32 lg:pb-40 px-6 md:px-12 overflow-hidden flex flex-col items-center border-t border-white/5">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-500/10 blur-[150px] -z-10 rounded-[100%]" />
 
       <motion.div
@@ -13,7 +13,7 @@ const Footer = () => {
         transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
         className="text-center mb-16 flex flex-col items-center"
       >
-        <h2 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight">Let's <span className="italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-emerald-400">connect.</span></h2>
+        <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-6 tracking-tight">Let's <span className="italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-emerald-400">connect.</span></h2>
         <p className="text-slate-400 text-lg md:text-xl font-light max-w-lg mb-12">
           Currently accepting exciting projects and full-time opportunities. Feel free to reach out.
         </p>
@@ -21,9 +21,10 @@ const Footer = () => {
         <div className="flex flex-wrap justify-center gap-4">
           <a
             href="mailto:ctom71718@gmail.com"
-            className="flex items-center gap-3 px-7 py-4 bg-white rounded-full text-base font-medium text-obsidian hover:bg-slate-200 transition-colors"
+            className="flex items-center gap-3 px-5 md:px-7 py-3 md:py-4 bg-white rounded-full text-sm md:text-base font-medium text-obsidian hover:bg-slate-200 transition-colors"
           >
-            <Mail className="w-5 h-5" /> ctom71718@gmail.com
+            <Mail className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
+            <span className="truncate max-w-[180px] md:max-w-none">ctom71718@gmail.com</span>
           </a>
           <a
             href="https://www.linkedin.com/in/tom-cherian-a599ba373/"

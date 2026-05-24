@@ -7,7 +7,7 @@ import TallyPrivacy from './pages/TallyPrivacy.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/badevil666">
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/tally-privacy" element={<TallyPrivacy />} />

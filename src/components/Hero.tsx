@@ -146,7 +146,7 @@ const Hero = () => {
   };
 
   return (
-    <section id="hero" className="relative min-h-screen flex flex-col justify-center items-center px-6 overflow-hidden pb-8">
+    <section id="hero" className="relative min-h-screen flex flex-col justify-center items-center px-6 overflow-hidden pb-24 md:pb-8">
 
       {/* Pulsing orb */}
       <motion.div style={{ scale: orbScale, willChange: 'transform' }} className="absolute w-[60vw] h-[60vw] max-w-[700px] max-h-[700px] -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
@@ -177,7 +177,7 @@ const Hero = () => {
 
             <motion.h1
               custom={1} initial="hidden" animate="visible" variants={textVariants}
-              className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter leading-tight mb-5"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter leading-tight mb-5"
             >
               Tom{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-emerald-400">
@@ -189,8 +189,12 @@ const Hero = () => {
               custom={2} initial="hidden" animate="visible" variants={textVariants}
               className="text-base md:text-lg text-slate-400 max-w-xl font-light leading-relaxed mb-8"
             >
-              I build scalable web and mobile applications, design efficient backend
-              systems, and test them for security vulnerabilities.
+              Full-stack engineer shipping products solo — from backend systems
+              to mobile apps on the Play Store. Currently:{' '}
+              <span className="text-amber-300 font-medium">Tally</span> (live on
+              Google Play) and{' '}
+              <span className="text-purple-300 font-medium">Socials</span> (AI
+              content platform). I also break into things — VAPT &amp; OWASP.
             </motion.p>
 
             <motion.div
@@ -336,39 +340,35 @@ const Hero = () => {
                   <img
                     src={profileImg}
                     alt="Tom Cherian"
-                    className="w-64 h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 rounded-full object-cover object-top"
+                    className="w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 xl:w-80 xl:h-80 rounded-full object-cover object-top"
                   />
                 </div>
               </div>
 
-              {/* Floating badge — top right */}
+              {/* Floating badges — desktop only (they overflow on small screens) */}
               <FloatBadge
                 icon={<Code2 className="w-4 h-4" />}
                 label="Full Stack"
                 sub="Web · Mobile · API"
                 color="#a855f7"
                 delay={0.8}
-                className="-top-4 -right-4 md:-right-12"
+                className="hidden xl:flex -top-4 -right-12"
               />
-
-              {/* Floating badge — bottom left */}
               <FloatBadge
                 icon={<ShieldCheck className="w-4 h-4" />}
                 label="Security"
                 sub="VAPT · OWASP"
                 color="#10b981"
                 delay={1.0}
-                className="-bottom-4 -left-4 md:-left-12"
+                className="hidden xl:flex -bottom-4 -left-12"
               />
-
-              {/* Floating badge — right middle */}
               <FloatBadge
                 icon={<Layers className="w-4 h-4" />}
-                label="3+ Projects"
-                sub="Shipped to users"
-                color="#6d28d9"
+                label="Play Store"
+                sub="Live · Real users"
+                color="#d4af37"
                 delay={1.2}
-                className="top-1/2 -translate-y-1/2 -right-6 md:-right-16"
+                className="hidden xl:flex top-1/2 -translate-y-1/2 -right-16"
               />
 
             </div>

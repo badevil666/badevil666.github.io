@@ -19,6 +19,41 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
+  /* Compositor hints — promote sections to their own GPU layer so
+     scroll-driven Framer Motion transforms don't repaint neighbours.
+     `contain: paint` is the biggest win: it isolates each section's
+     paint so scrolling one doesn't invalidate the others. */
+  section, footer {
+    contain: layout paint style;
+    transform: translateZ(0);
+  }
+
+  /* Background canvases stay on their own layer too. */
+  canvas {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  /* Respect OS-level "reduce motion" preference (vestibular disorders,
+     migraine triggers). Disables every animation + transition without
+     breaking layout. Required for WCAG 2.1 AA. */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Keyboard-only focus ring — invisible to mouse users, clearly visible
+     when tabbing through. */
+  :focus-visible {
+    outline: 2px solid #a855f7;
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+
   h1, h2, h3, h4 {
     text-shadow: 0 2px 16px rgba(0, 0, 0, 0.85), 0 1px 4px rgba(0, 0, 0, 0.9);
   }
@@ -62,8 +97,17 @@ body {
 
 section {
   min-height: 100vh;
+  /* bottom padding on mobile so fixed bottom navbar never overlaps content */
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 section#projects {
   min-height: auto;
+}
+
+/* Mobile bottom navbar clearance */
+@media (max-width: 767px) {
+  section, footer {
+    padding-bottom: 5rem;
+  }
 }

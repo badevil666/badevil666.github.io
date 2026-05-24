@@ -1,49 +1,86 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Home, User, Cpu, FolderOpen, ShieldCheck, Mail, GitBranch } from 'lucide-react';
+import { Home, User, Cpu, FolderOpen, Trophy, ShieldCheck, Mail, GitBranch } from 'lucide-react';
 import projects from '../data/projects';
 import { scrollToId } from '../utils/smoothScroll';
 
 const NAV_ITEMS = [
-  { id: 'hero',     label: 'Home',     icon: Home        },
-  { id: 'about',    label: 'About',    icon: User        },
-  { id: 'skills',   label: 'Skills',   icon: Cpu         },
-  { id: 'projects', label: 'Projects', icon: FolderOpen  },
-  { id: 'security', label: 'Security', icon: ShieldCheck },
-  { id: 'contact',  label: 'Contact',  icon: Mail        },
+  { id: 'hero',         label: 'Home',         icon: Home        },
+  { id: 'about',        label: 'About',        icon: User        },
+  { id: 'skills',       label: 'Skills',       icon: Cpu         },
+  { id: 'projects',     label: 'Projects',     icon: FolderOpen  },
+  { id: 'achievements', label: 'Achievements', icon: Trophy      },
+  { id: 'security',     label: 'Security',     icon: ShieldCheck },
+  { id: 'contact',      label: 'Contact',      icon: Mail        },
 ];
 
 const Navbar = () => {
   const [active, setActive]               = useState('hero');
-  const [activeProject, setActiveProject] = useState(0);
+  // null until a project card actually scrolls into view — prevents the
+  // first dot from glowing while the user is still on the Projects intro.
+  const [activeProject, setActiveProject] = useState<number | null>(null);
   const [hovered, setHovered]             = useState<string | null>(null);
+  const [isMobile, setIsMobile]           = useState(false);
 
   useEffect(() => {
-    const onScroll = () => {
-      const mid = window.scrollY + window.innerHeight / 2;
+    // Match the CSS lg: breakpoint (1024px). Below that we render the
+    // bottom-bar layout so the nav never overlaps content on tablets
+    // or large phones in landscape.
+    const check = () => setIsMobile(window.innerWidth < 1024);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
 
-      // Active section
+  useEffect(() => {
+    // Coalesce multiple scroll events into a single rAF — at most one
+    // recompute per frame even if Lenis fires events faster than 60 Hz.
+    // This was the biggest scroll-jank source (12+ getBoundingClientRect
+    // calls firing on every wheel tick).
+    let rafId = 0;
+    let ticking = false;
+
+    const compute = () => {
+      ticking = false;
+      const mid = window.scrollY + window.innerHeight / 2;
       let current = NAV_ITEMS[0].id;
-      NAV_ITEMS.forEach(({ id }) => {
+      for (const { id } of NAV_ITEMS) {
         const el = document.getElementById(id);
-        if (el && el.offsetTop <= mid) current = id;
-      });
+        if (el && el.getBoundingClientRect().top + window.scrollY <= mid) {
+          current = id;
+        }
+      }
       setActive(current);
 
-      // Active project within the Projects section
       if (current === 'projects') {
-        let currentProject = 0;
-        projects.forEach((_, i) => {
+        // Stay null until a project card top has crossed the mid line so
+        // the first dot doesn't glow on the Projects intro section.
+        let cur: number | null = null;
+        for (let i = 0; i < projects.length; i++) {
           const el = document.getElementById(`project-${i}`);
-          if (el && el.offsetTop <= mid) currentProject = i;
-        });
-        setActiveProject(currentProject);
+          if (el && el.getBoundingClientRect().top + window.scrollY <= mid) {
+            cur = i;
+          }
+        }
+        setActiveProject(cur);
+      } else {
+        setActiveProject(null);
       }
     };
 
-    onScroll();
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        rafId = requestAnimationFrame(compute);
+      }
+    };
+
+    compute(); // initial state
     window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      cancelAnimationFrame(rafId);
+    };
   }, []);
 
   const scrollTo        = (id: string) => scrollToId(id);
@@ -51,26 +88,29 @@ const Navbar = () => {
 
   return (
     <motion.aside
-      initial={{ opacity: 0, x: -24 }}
-      animate={{ opacity: 1, x: 0 }}
+      initial={{ opacity: 0, ...(isMobile ? { y: 24 } : { x: -24 }) }}
+      animate={{ opacity: 1, x: 0, y: 0 }}
       transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-      className="fixed left-5 top-1/2 -translate-y-1/2 z-50 flex flex-col items-center gap-0.5 glass px-2 py-3 rounded-2xl border border-white/10"
+      className={[
+        'fixed z-50 glass border border-white/10 rounded-2xl',
+        // Mobile: horizontal bottom bar
+        'bottom-4 left-1/2 -translate-x-1/2 flex flex-row items-center gap-0.5 px-2 py-2',
+        // Desktop: vertical left bar
+        'lg:bottom-auto lg:left-5 lg:top-1/2 lg:-translate-x-0 lg:-translate-y-1/2 lg:flex-col lg:px-2 lg:py-3',
+      ].join(' ')}
     >
       {NAV_ITEMS.map(({ id, label, icon: Icon }) => (
-        <div key={id} className="flex flex-col items-center w-full">
-          {/* Main nav button */}
-          <div className="relative flex items-center w-full justify-center">
+        <div key={id} className="flex flex-col items-center">
+          {/* Nav button */}
+          <div className="relative flex items-center justify-center">
             <button
               onClick={() => scrollTo(id)}
-              onMouseEnter={() => setHovered(id)}
+              onMouseEnter={() => !isMobile && setHovered(id)}
               onMouseLeave={() => setHovered(null)}
-              className="relative w-11 h-11 flex items-center justify-center rounded-xl"
+              className="relative w-10 h-10 lg:w-11 lg:h-11 flex items-center justify-center rounded-xl"
             >
               <motion.span
-                animate={{
-                  opacity: active === id ? 1 : 0,
-                  scale:   active === id ? 1 : 0.85,
-                }}
+                animate={{ opacity: active === id ? 1 : 0, scale: active === id ? 1 : 0.85 }}
                 transition={{ duration: 0.22, ease: 'easeOut' }}
                 className="absolute inset-0 rounded-xl bg-white/10"
                 style={{ boxShadow: '0 0 14px rgba(168,85,247,0.2)' }}
@@ -80,18 +120,18 @@ const Navbar = () => {
                 transition={{ duration: 0.22 }}
                 className="relative z-10"
               >
-                <Icon className="w-5 h-5" />
+                <Icon className="w-4 h-4 lg:w-5 lg:h-5" />
               </motion.div>
             </button>
 
-            {/* Tooltip */}
+            {/* Tooltip — desktop only */}
             <AnimatePresence>
-              {hovered === id && (
+              {!isMobile && hovered === id && (
                 <motion.div
                   initial={{ opacity: 0, x: -6, scale: 0.92 }}
                   animate={{ opacity: 1, x: 0, scale: 1 }}
                   exit={{ opacity: 0, x: -6, scale: 0.92 }}
-                  transition={{ duration: 0.15, ease: 'easeOut' }}
+                  transition={{ duration: 0.15 }}
                   className="absolute left-[calc(100%+10px)] px-3 py-1.5 rounded-lg bg-obsidian border border-white/10 text-xs font-medium text-slate-200 whitespace-nowrap pointer-events-none shadow-xl"
                 >
                   {label}
@@ -100,19 +140,17 @@ const Navbar = () => {
             </AnimatePresence>
           </div>
 
-          {/* Project timeline — only under the Projects icon */}
+          {/* Project timeline — desktop only */}
           <AnimatePresence>
-            {id === 'projects' && active === 'projects' && (
+            {!isMobile && id === 'projects' && active === 'projects' && (
               <motion.div
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
                 exit={{ opacity: 0, height: 0 }}
                 transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                className="flex flex-col items-center overflow-hidden"
+                className="hidden lg:flex flex-col items-center overflow-hidden"
               >
-                {/* Line from Projects icon to first dot */}
                 <div className="w-px h-2 bg-white/15" />
-
                 {projects.map((project, i) => (
                   <motion.div
                     key={project.title}
@@ -122,38 +160,31 @@ const Navbar = () => {
                     transition={{ delay: i * 0.07, duration: 0.25 }}
                     className="flex flex-col items-center"
                   >
-                    {/* Dot + tooltip */}
                     <div className="relative flex items-center justify-center">
                       <button
                         onClick={() => scrollToProject(i)}
                         onMouseEnter={() => setHovered(`project-${i}`)}
                         onMouseLeave={() => setHovered(null)}
-                        className="w-8 h-8 flex items-center justify-center group"
+                        className="w-8 h-8 flex items-center justify-center"
                       >
                         <motion.div
                           animate={{
                             width:  activeProject === i ? 9 : 6,
                             height: activeProject === i ? 9 : 6,
-                            backgroundColor: activeProject === i
-                              ? '#a855f7'
-                              : 'rgba(255,255,255,0.2)',
-                            boxShadow: activeProject === i
-                              ? '0 0 8px rgba(168,85,247,0.6)'
-                              : 'none',
+                            backgroundColor: activeProject === i ? '#a855f7' : 'rgba(255,255,255,0.2)',
+                            boxShadow: activeProject === i ? '0 0 8px rgba(168,85,247,0.6)' : 'none',
                           }}
                           transition={{ type: 'spring', stiffness: 400, damping: 28 }}
                           className="rounded-full"
                         />
                       </button>
-
-                      {/* Project tooltip */}
                       <AnimatePresence>
                         {hovered === `project-${i}` && (
                           <motion.div
                             initial={{ opacity: 0, x: -6, scale: 0.92 }}
                             animate={{ opacity: 1, x: 0, scale: 1 }}
                             exit={{ opacity: 0, x: -6, scale: 0.92 }}
-                            transition={{ duration: 0.15, ease: 'easeOut' }}
+                            transition={{ duration: 0.15 }}
                             className="absolute left-[calc(100%+10px)] px-3 py-1.5 rounded-lg bg-obsidian border border-white/10 text-xs font-medium text-slate-200 whitespace-nowrap pointer-events-none shadow-xl"
                           >
                             {project.title}
@@ -161,15 +192,9 @@ const Navbar = () => {
                         )}
                       </AnimatePresence>
                     </div>
-
-                    {/* Connector line between dots */}
-                    {i < projects.length - 1 && (
-                      <div className="w-px h-4 bg-white/15" />
-                    )}
+                    {i < projects.length - 1 && <div className="w-px h-4 bg-white/15" />}
                   </motion.div>
                 ))}
-
-                {/* Gap before next section icon */}
                 <div className="h-1" />
               </motion.div>
             )}
@@ -177,11 +202,9 @@ const Navbar = () => {
         </div>
       ))}
 
-      {/* Divider */}
-      <div className="my-1 w-6 border-t border-white/10" />
-
-      {/* GitHub */}
-      <div className="relative flex items-center justify-center">
+      {/* Divider + GitHub — desktop only */}
+      <div className="hidden lg:block my-1 w-6 border-t border-white/10" />
+      <div className="hidden lg:flex relative items-center justify-center">
         <a
           href="https://github.com/badevil666"
           target="_blank"
@@ -198,7 +221,7 @@ const Navbar = () => {
               initial={{ opacity: 0, x: -6, scale: 0.92 }}
               animate={{ opacity: 1, x: 0, scale: 1 }}
               exit={{ opacity: 0, x: -6, scale: 0.92 }}
-              transition={{ duration: 0.15, ease: 'easeOut' }}
+              transition={{ duration: 0.15 }}
               className="absolute left-[calc(100%+10px)] px-3 py-1.5 rounded-lg bg-obsidian border border-white/10 text-xs font-medium text-slate-200 whitespace-nowrap pointer-events-none shadow-xl"
             >
               GitHub

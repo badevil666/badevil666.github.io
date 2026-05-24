@@ -38,7 +38,7 @@ const Security = () => (
       className="text-center mb-24"
     >
       <p className="text-purple-400 font-medium tracking-widest uppercase mb-4 text-sm">Offensive Defense</p>
-      <h2 className="text-4xl md:text-6xl font-bold tracking-tight">
+      <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold tracking-tight">
         Security & <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-purple-400">VAPT</span>
       </h2>
     </motion.div>
@@ -51,7 +51,7 @@ const Security = () => (
           whileInView={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
           viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1], delay: index * 0.09 }}
-          className="group relative glass-card p-10 overflow-hidden hover:-translate-y-2 transition-transform duration-500"
+          className="group relative glass-card p-6 md:p-10 overflow-hidden hover:-translate-y-2 transition-transform duration-500"
         >
           <div className="absolute inset-0 bg-gradient-to-br from-purple-500/0 to-emerald-500/0 group-hover:from-purple-500/10 group-hover:to-emerald-500/5 transition-colors duration-500" />
 
@@ -61,7 +61,7 @@ const Security = () => (
                 {sec.icon}
               </div>
               <div>
-                <h3 className="text-2xl font-bold text-slate-100">{sec.title}</h3>
+                <h3 className="text-lg md:text-2xl font-bold text-slate-100">{sec.title}</h3>
                 <p className="text-xs font-semibold tracking-widest text-slate-500 uppercase mt-1">{sec.tag}</p>
               </div>
             </div>

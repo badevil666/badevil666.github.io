@@ -130,7 +130,7 @@ const Projects = ({ onSelect }: { onSelect: (project: Project) => void }) => (
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
       >
         <p className="text-emerald-400 text-sm font-semibold tracking-widest uppercase mb-4">Portfolio</p>
-        <h2 className="text-5xl md:text-6xl font-bold tracking-tight">
+        <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight">
           Selected{' '}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-emerald-600">Works</span>
         </h2>
