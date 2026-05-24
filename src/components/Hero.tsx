@@ -146,7 +146,7 @@ const Hero = () => {
   };
 
   return (
-    <section id="hero" className="relative min-h-screen flex flex-col justify-center items-center px-6 overflow-hidden pb-24 md:pb-8">
+    <section id="hero" className="relative min-h-screen flex flex-col justify-center items-center px-5 sm:px-6 overflow-hidden pb-24 md:pb-8">
 
       {/* Pulsing orb */}
       <motion.div style={{ scale: orbScale, willChange: 'transform' }} className="absolute w-[60vw] h-[60vw] max-w-[700px] max-h-[700px] -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
@@ -164,15 +164,15 @@ const Hero = () => {
         className="z-10 w-full max-w-6xl mx-auto flex flex-col items-center gap-14"
       >
         {/* Two-column: text + photo */}
-        <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div className="w-full min-w-0 grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center">
 
           {/* ── Left: Text ── */}
-          <div className="flex flex-col items-center md:items-start text-center md:text-left order-2 md:order-1">
+          <div className="flex flex-col items-center md:items-start text-center md:text-left order-2 md:order-1 min-w-0 w-full">
             <motion.p
               custom={0} initial="hidden" animate="visible" variants={textVariants}
-              className="text-emerald-400 font-semibold tracking-widest uppercase mb-4 text-sm"
+              className="text-emerald-400 font-semibold tracking-[0.25em] uppercase mb-4 text-[11px] sm:text-sm max-w-full break-words"
             >
-              Full Stack Developer &amp; Security Focus
+              Full Stack · Security · VAPT
             </motion.p>
 
             <motion.h1
@@ -187,7 +187,7 @@ const Hero = () => {
 
             <motion.p
               custom={2} initial="hidden" animate="visible" variants={textVariants}
-              className="text-base md:text-lg text-slate-400 max-w-xl font-light leading-relaxed mb-8"
+              className="text-[15px] sm:text-base md:text-lg text-slate-400 max-w-full md:max-w-xl font-light leading-relaxed mb-8 px-1"
             >
               Full-stack engineer shipping products solo — from backend systems
               to mobile apps on the Play Store. Currently:{' '}

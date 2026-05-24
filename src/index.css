@@ -12,9 +12,13 @@
 }
 
 @layer base {
-  body {
+  html, body {
     @apply bg-obsidian text-slate-200 font-space;
     margin: 0;
+    /* Hard safety net: no component can push the page sideways. Marquees,
+       absolutely-positioned badges with negative offsets, etc. get clipped
+       at the viewport edge instead of creating horizontal scroll. */
+    overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
