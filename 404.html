@@ -3,10 +3,9 @@
 <head>
   <script>
     // GitHub Pages SPA redirect — preserves path so React Router can handle it
-    const base = '/badevil666';
-    const path = window.location.pathname.replace(base, '') || '/';
+    const path = window.location.pathname || '/';
     sessionStorage.setItem('redirect', path);
-    window.location.replace(base + '/');
+    window.location.replace('/');
   </script>
 </head>
 </html>
