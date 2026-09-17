@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Home, User, Cpu, FolderOpen, Trophy, ShieldCheck, Mail, GitBranch } from 'lucide-react';
+import { Home, Cpu, FolderOpen, Trophy, ShieldCheck, Mail, GitBranch } from 'lucide-react';
 import projects from '../data/projects';
 import { scrollToId } from '../utils/smoothScroll';
 
 const NAV_ITEMS = [
   { id: 'hero',         label: 'Home',         icon: Home        },
-  { id: 'about',        label: 'About',        icon: User        },
   { id: 'skills',       label: 'Skills',       icon: Cpu         },
   { id: 'projects',     label: 'Projects',     icon: FolderOpen  },
   { id: 'achievements', label: 'Achievements', icon: Trophy      },
@@ -113,10 +112,9 @@ const Navbar = () => {
                 animate={{ opacity: active === id ? 1 : 0, scale: active === id ? 1 : 0.85 }}
                 transition={{ duration: 0.22, ease: 'easeOut' }}
                 className="absolute inset-0 rounded-xl bg-white/10"
-                style={{ boxShadow: '0 0 14px rgba(168,85,247,0.2)' }}
               />
               <motion.div
-                animate={{ color: active === id ? '#ffffff' : '#475569' }}
+                animate={{ color: active === id ? '#f5f5f7' : '#6e6e73' }}
                 transition={{ duration: 0.22 }}
                 className="relative z-10"
               >
@@ -132,7 +130,7 @@ const Navbar = () => {
                   animate={{ opacity: 1, x: 0, scale: 1 }}
                   exit={{ opacity: 0, x: -6, scale: 0.92 }}
                   transition={{ duration: 0.15 }}
-                  className="absolute left-[calc(100%+10px)] px-3 py-1.5 rounded-lg bg-obsidian border border-white/10 text-xs font-medium text-slate-200 whitespace-nowrap pointer-events-none shadow-xl"
+                  className="absolute left-[calc(100%+10px)] px-3 py-1.5 rounded-lg bg-surface border border-white/10 text-xs font-medium text-ink whitespace-nowrap pointer-events-none shadow-xl"
                 >
                   {label}
                 </motion.div>
@@ -171,8 +169,7 @@ const Navbar = () => {
                           animate={{
                             width:  activeProject === i ? 9 : 6,
                             height: activeProject === i ? 9 : 6,
-                            backgroundColor: activeProject === i ? '#a855f7' : 'rgba(255,255,255,0.2)',
-                            boxShadow: activeProject === i ? '0 0 8px rgba(168,85,247,0.6)' : 'none',
+                            backgroundColor: activeProject === i ? '#2997ff' : 'rgba(255,255,255,0.2)',
                           }}
                           transition={{ type: 'spring', stiffness: 400, damping: 28 }}
                           className="rounded-full"
@@ -185,7 +182,7 @@ const Navbar = () => {
                             animate={{ opacity: 1, x: 0, scale: 1 }}
                             exit={{ opacity: 0, x: -6, scale: 0.92 }}
                             transition={{ duration: 0.15 }}
-                            className="absolute left-[calc(100%+10px)] px-3 py-1.5 rounded-lg bg-obsidian border border-white/10 text-xs font-medium text-slate-200 whitespace-nowrap pointer-events-none shadow-xl"
+                            className="absolute left-[calc(100%+10px)] px-3 py-1.5 rounded-lg bg-surface border border-white/10 text-xs font-medium text-ink whitespace-nowrap pointer-events-none shadow-xl"
                           >
                             {project.title}
                           </motion.div>
@@ -222,7 +219,7 @@ const Navbar = () => {
               animate={{ opacity: 1, x: 0, scale: 1 }}
               exit={{ opacity: 0, x: -6, scale: 0.92 }}
               transition={{ duration: 0.15 }}
-              className="absolute left-[calc(100%+10px)] px-3 py-1.5 rounded-lg bg-obsidian border border-white/10 text-xs font-medium text-slate-200 whitespace-nowrap pointer-events-none shadow-xl"
+              className="absolute left-[calc(100%+10px)] px-3 py-1.5 rounded-lg bg-surface border border-white/10 text-xs font-medium text-ink whitespace-nowrap pointer-events-none shadow-xl"
             >
               GitHub
             </motion.div>

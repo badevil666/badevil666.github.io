@@ -51,6 +51,13 @@ export const scrollToId = (id: string, duration?: number) => {
   }
 };
 
+// Lenis hijacks wheel events at the window level for its smooth-scroll
+// simulation, which breaks native scrolling inside a nested overlay (e.g. the
+// Blueprint case-study modal) on desktop wheel/trackpad input. Pause it while
+// such an overlay is open, resume when it closes.
+export const pauseSmoothScroll = () => lenisInstance?.stop();
+export const resumeSmoothScroll = () => lenisInstance?.start();
+
 export const smoothScrollTo = (targetY: number, duration?: number) => {
   if (lenisInstance) {
     lenisInstance.scrollTo(targetY, { duration: duration || 1.2 });

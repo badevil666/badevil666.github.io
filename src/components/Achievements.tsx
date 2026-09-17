@@ -9,8 +9,6 @@ type Achievement = {
   description: string;
   context: string;
   year: string;
-  accent: string;            // text color
-  ringGlow: string;          // inline color for the node ring shadow
 };
 
 // Newest first so the timeline reads top → bottom as latest → earliest, the
@@ -24,8 +22,6 @@ const ACHIEVEMENTS: Achievement[] = [
       'DeCloud was selected as the best B.Tech final-year project — a peer-to-peer file storage network with Ethereum-based provider rewards, Node.js backend, Solidity smart contracts, and a Flutter wallet client.',
     context: 'B.Tech Capstone · Final Year',
     year: '2026',
-    accent: 'text-sky-300',
-    ringGlow: 'rgba(56,189,248,0.55)',
   },
   {
     icon: Medal,
@@ -35,8 +31,6 @@ const ACHIEVEMENTS: Achievement[] = [
       'Built UniMate, a student-life assistant app, and placed second in a multi-college hackathon during my second year.',
     context: 'Rajiv Gandhi Institute of Technology, Kottayam · Year 2',
     year: '2024',
-    accent: 'text-emerald-300',
-    ringGlow: 'rgba(16,185,129,0.55)',
   },
   {
     icon: Trophy,
@@ -46,8 +40,6 @@ const ACHIEVEMENTS: Achievement[] = [
       'Won first place in the first-year hackathon at Rajiv Gandhi Institute of Technology, Kottayam by designing and building a full supermarket inventory + POS system inside the time window.',
     context: 'Rajiv Gandhi Institute of Technology, Kottayam · Year 1',
     year: '2022',
-    accent: 'text-purple-300',
-    ringGlow: 'rgba(168,85,247,0.55)',
   },
   {
     icon: GraduationCap,
@@ -57,8 +49,6 @@ const ACHIEVEMENTS: Achievement[] = [
       'Recognized as the top Computer Science student of the graduating class by the school principal.',
     context: "St Mary's HSS Pattom · Grade 11",
     year: '2020',
-    accent: 'text-amber-300',
-    ringGlow: 'rgba(252,211,77,0.55)',
   },
 ];
 
@@ -79,54 +69,28 @@ const slideIn = (fromLeft: boolean, delay = 0) => ({
 const Card = ({ a }: { a: Achievement }) => {
   const Icon = a.icon;
   return (
-    <div
-      className={[
-        'group relative overflow-hidden rounded-2xl',
-        'bg-white/[0.025] border border-white/10 backdrop-blur-sm',
-        'p-6 md:p-7 transition-all duration-500',
-        'hover:bg-white/[0.04] hover:border-white/20',
-      ].join(' ')}
-    >
-      {/* Hover wash */}
-      <div
-        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
-        style={{
-          background:
-            'radial-gradient(ellipse 80% 60% at 0% 0%, rgba(255,255,255,0.04), transparent 60%)',
-        }}
-      />
-
+    <div className="group relative overflow-hidden rounded-2xl bg-black border border-white/10 p-6 md:p-7 transition-colors duration-300 hover:border-white/20">
       {/* Mobile-only header row: icon + year (timeline node is hidden on mobile) */}
-      <div className="relative md:hidden flex items-center gap-3 mb-4">
-        <div
-          className={[
-            'w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0',
-            'bg-white/[0.04] border border-white/10',
-            a.accent,
-          ].join(' ')}
-        >
+      <div className="md:hidden flex items-center gap-3 mb-4">
+        <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 bg-white/[0.06] text-ink">
           <Icon className="w-5 h-5" strokeWidth={1.8} />
         </div>
-        <span className="text-xs font-mono tracking-widest text-slate-500">
-          {a.year}
-        </span>
+        <span className="text-xs tracking-wide text-muted">{a.year}</span>
       </div>
 
-      <div className="relative mb-3">
-        <h3 className="text-lg md:text-xl font-bold text-slate-100 leading-tight mb-1.5">
+      <div className="mb-3">
+        <h3 className="text-lg md:text-xl font-semibold text-ink leading-tight mb-1.5">
           {a.title}
         </h3>
-        <p className={`text-sm font-medium ${a.accent}`}>{a.subtitle}</p>
+        <p className="text-sm font-medium text-[#d2d2d7]">{a.subtitle}</p>
       </div>
 
-      <p className="relative text-[14px] text-slate-400 font-light leading-relaxed mb-5">
+      <p className="text-[14px] text-muted leading-relaxed mb-5">
         {a.description}
       </p>
 
-      <div className="relative pt-4 border-t border-white/5">
-        <p className="text-[10.5px] uppercase tracking-widest text-slate-500">
-          {a.context}
-        </p>
+      <div className="pt-4 border-t border-white/10">
+        <p className="text-[12px] text-muted">{a.context}</p>
       </div>
     </div>
   );
@@ -140,19 +104,10 @@ const Achievements = () => (
     <div className="max-w-6xl mx-auto w-full">
       {/* ── Header ───────────────────────────────────────────────────────── */}
       <motion.div {...fade(0)} className="mb-16 md:mb-24">
-        <div className="flex items-center gap-3 mb-4">
-          <div className="h-px w-12 bg-gradient-to-r from-amber-400 to-transparent" />
-          <p className="text-xs uppercase tracking-[0.3em] text-amber-400/80 font-semibold">
-            Recognition
-          </p>
-        </div>
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">
-          A few wins along{' '}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-400 to-yellow-500 italic font-light">
-            the way.
-          </span>
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-[-0.02em] text-ink">
+          A few wins along the way.
         </h2>
-        <p className="text-slate-400 font-light mt-4 max-w-2xl">
+        <p className="text-muted mt-4 max-w-2xl">
           Awards and competitions where my work was recognized — from school
           through to my B.Tech capstone.
         </p>
@@ -192,30 +147,17 @@ const Achievements = () => (
                       // the icon inside each card on mobile to save horizontal room
                       'hidden md:flex',
                       'w-14 h-14 rounded-full items-center justify-center',
-                      'bg-obsidian border-2',
-                      a.accent,
+                      'bg-obsidian border-2 border-white/20 text-ink',
                     ].join(' ')}
-                    style={{
-                      borderColor: a.ringGlow,
-                      boxShadow: `0 0 30px -6px ${a.ringGlow}`,
-                    }}
                   >
                     <Icon className="w-6 h-6" strokeWidth={1.9} />
                   </div>
                   {/* Mobile: simple dot on the line so the line has rhythm */}
-                  <div
-                    className="md:hidden w-3 h-3 rounded-full"
-                    style={{
-                      background: a.ringGlow,
-                      boxShadow: `0 0 18px ${a.ringGlow}`,
-                    }}
-                  />
+                  <div className="md:hidden w-3 h-3 rounded-full bg-white/40" />
                 </motion.div>
 
-                {/* Desktop: year label on the side opposite to the card.
-                    Tinted with the achievement's accent and bumped to a
-                    visible (but still ghosted) opacity so it reads as a
-                    timeline year, not as decoration. */}
+                {/* Desktop: year label on the side opposite to the card,
+                    quiet and small — a date, not a decoration. */}
                 <motion.div
                   {...fade(0.15)}
                   className={[
@@ -225,14 +167,7 @@ const Achievements = () => (
                       : 'right-1/2 mr-12 text-right',
                   ].join(' ')}
                 >
-                  <span
-                    className="text-6xl lg:text-7xl xl:text-8xl font-black font-mono tracking-tighter select-none leading-none block"
-                    style={{
-                      color: a.ringGlow,
-                      opacity: 0.55,
-                      textShadow: `0 0 40px ${a.ringGlow}`,
-                    }}
-                  >
+                  <span className="text-sm font-medium text-muted tracking-wide">
                     {a.year}
                   </span>
                 </motion.div>

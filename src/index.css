@@ -1,19 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 @import "tailwindcss";
 
 @theme {
-  --color-obsidian: #0a0a0a;
-  --color-midnight: #0f172a;
-  --color-gold-500: #d4af37;
-  --color-purple-500: #a855f7;
-  --color-emerald-500: #10b981;
-  --font-space: 'Space Grotesk', sans-serif;
+  /* True black — the site's ground. Not a tinted near-black. */
+  --color-obsidian: #000000;
+  --color-midnight: #1d1d1f;
+  --color-surface: #1d1d1f;
+  --color-ink: #f5f5f7;
+  --color-muted: #86868b;
+  --color-accent: #2997ff;
+  --font-space: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
 @layer base {
   html, body {
-    @apply bg-obsidian text-slate-200 font-space;
+    @apply bg-obsidian text-ink font-space;
     margin: 0;
     /* Hard safety net: no component can push the page sideways. Marquees,
        absolutely-positioned badges with negative offsets, etc. get clipped
@@ -21,6 +23,7 @@
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    letter-spacing: -0.011em;
   }
 
   /* Compositor hints — promote sections to their own GPU layer so
@@ -53,41 +56,28 @@
   /* Keyboard-only focus ring — invisible to mouse users, clearly visible
      when tabbing through. */
   :focus-visible {
-    outline: 2px solid #a855f7;
+    outline: 2px solid #2997ff;
     outline-offset: 2px;
     border-radius: 6px;
   }
 
-  h1, h2, h3, h4 {
-    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.85), 0 1px 4px rgba(0, 0, 0, 0.9);
-  }
-
-  p, li, span, a, button, label {
-    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.75);
+  ::selection {
+    background: rgba(41, 151, 255, 0.35);
   }
 }
 
 @layer utilities {
+  /* Frosted nav chrome — the one place a blur belongs, since it sits over
+     scrolling content rather than flat black. */
   .glass {
-    @apply bg-white/5 backdrop-blur-xl border border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.1)];
+    @apply bg-white/[0.06] backdrop-blur-xl border border-white/10;
   }
-  
+
+  /* Flat elevated surface for content cards — defined purely by its
+     border, not a lighter fill, to stay flush with the true-black page. */
   .glass-card {
-    @apply bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl;
+    @apply bg-black border border-white/10 rounded-3xl;
   }
-
-  .text-glow {
-    text-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
-  }
-}
-
-@keyframes marquee-left {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-@keyframes marquee-right {
-  0%   { transform: translateX(-50%); }
-  100% { transform: translateX(0); }
 }
 
 html {
