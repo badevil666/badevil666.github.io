@@ -218,8 +218,8 @@ const Hero = () => (
           </motion.div>
         </div>
 
-        {/* ── Key skills + What I do — last on mobile, bottom-right on desktop ── */}
-        <div className="flex flex-col items-center md:items-start order-3 md:order-none md:col-start-2 md:row-start-2 w-full">
+        {/* ── Key skills + What I do — desktop only, bottom-right column ── */}
+        <div className="hidden md:flex flex-col items-center md:items-start order-3 md:order-none md:col-start-2 md:row-start-2 w-full">
           <motion.div
             custom={2} initial="hidden" animate="visible" variants={textVariants}
             className="w-full text-center md:text-left mb-5"
