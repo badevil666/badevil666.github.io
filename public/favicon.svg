@@ -1,43 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
-  <defs>
-    <!-- Portfolio brand gradient: purple → emerald, matches Hero name + Footer -->
-    <linearGradient id="brand" x1="6" y1="10" x2="58" y2="56" gradientUnits="userSpaceOnUse">
-      <stop offset="0"   stop-color="#a855f7"/>
-      <stop offset="0.55" stop-color="#7c3aed"/>
-      <stop offset="1"   stop-color="#10b981"/>
-    </linearGradient>
-    <!-- Subtle inner highlight on the tile so the gradient pops -->
-    <linearGradient id="sheen" x1="0" y1="0" x2="0" y2="64" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#ffffff" stop-opacity="0.08"/>
-      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
-    </linearGradient>
-  </defs>
-
-  <!-- Dark obsidian tile, rounded — same shape as iOS/Android app icons -->
-  <rect width="64" height="64" rx="14" fill="#0a0a0a"/>
-  <rect width="64" height="64" rx="14" fill="url(#sheen)"/>
-
-  <!-- TC monogram. Heavy weight + tight tracking so it stays legible at
-       16×16. The 'C' overlaps the 'T' bottom for a custom-mark feel. -->
-  <g fill="url(#brand)">
-    <!-- T -->
-    <path d="M10 16 h26 v8 h-9 v28 h-8 V24 h-9 z"/>
-    <!-- C — open-bottomed arc, hugs the right edge -->
-    <path d="M54 28
-             a14 14 0 0 0 -14 -14
-             a14 14 0 0 0 -14 14
-             v8
-             a14 14 0 0 0 14 14
-             a14 14 0 0 0 14 -14
-             h-8
-             a6 6 0 0 1 -6 6
-             a6 6 0 0 1 -6 -6
-             v-8
-             a6 6 0 0 1 6 -6
-             a6 6 0 0 1 6 6 z"/>
-  </g>
+  <!-- Pitch-black tile, rounded — same shape as iOS/Android app icons -->
+  <rect width="64" height="64" rx="14" fill="#000000"/>
 
   <!-- 1px inner stroke on the tile for crisp edge at small sizes -->
   <rect x="0.5" y="0.5" width="63" height="63" rx="13.5" fill="none"
         stroke="#ffffff" stroke-opacity="0.08"/>
+
+  <!-- Simple white T, centered -->
+  <g fill="#ffffff">
+    <rect x="14" y="16" width="36" height="9" rx="2"/>
+    <rect x="27.5" y="16" width="9" height="32" rx="2"/>
+  </g>
 </svg>
