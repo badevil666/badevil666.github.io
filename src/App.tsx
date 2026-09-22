@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Splash from './components/Splash';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Skills from './components/Skills';
@@ -21,6 +22,8 @@ function App() {
 
   return (
     <div className="bg-obsidian text-ink font-space min-h-screen">
+      <Splash />
+
       {/* Side navbar — always visible */}
       <Navbar />
 
